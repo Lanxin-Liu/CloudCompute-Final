@@ -2,6 +2,7 @@ package com.anonymco.demo.dao;
 
 import com.anonymco.demo.model.Purchase;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 /**

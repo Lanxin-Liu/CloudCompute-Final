@@ -10,6 +10,7 @@ import java.math.BigDecimal;
  * @version: v1.0
  */
 public class Purchase {
+    private int ID;
     private int productID;
     private int billID;
     private BigDecimal amount;
@@ -17,6 +18,14 @@ public class Purchase {
 
     public int getProductID() {
         return productID;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public void setProductID(int productID) {

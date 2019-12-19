@@ -16,10 +16,13 @@ import java.util.List;
  */
 @Repository
 public interface BillDAO {
-    @Insert("insert into Bill(ID,totalprice,discount,finalprice,realpay,date) values(#{ID},#{totalprice},#{discount},#{finalprice},#{realpay},#{date})")
+    @Insert("insert into Bill(ID,totalprice,discount,finalprice,date) values(#{ID},#{totalprice},#{discount},#{finalprice},#{date})")
     void createBill(Bill bill);
 
     //打印订单
     @Select("select * from Bill order by date desc")
     List<Bill> billList();
+
+    @Select("select max(ID) from Bill")
+    int getBillID();
 }

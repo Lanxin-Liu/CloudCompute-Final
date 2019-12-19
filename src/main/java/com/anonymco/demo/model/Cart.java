@@ -14,9 +14,18 @@ public class Cart {
     private BigDecimal amount;
     private BigDecimal sumprice;
     private int purchased;
+    private int cartID;
 
     public Cart() {
         this.purchased = 0;
+    }
+
+    public int getCartID() {
+        return cartID;
+    }
+
+    public void setCartID(int cartID) {
+        this.cartID = cartID;
     }
 
     public int getProductID() {

@@ -15,6 +15,6 @@ import java.util.List;
  */
 @Repository
 public interface CorporationDAO {
-    @Select("select * from Corporation where name = #{name}")
+    @Select("select * from Corporation where locate(#{name},name)>0")
     List<Corporation> corp(String name);
 }

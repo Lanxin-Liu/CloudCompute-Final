@@ -40,30 +40,53 @@ public class SupplyController {
         return supplyService.getComByCor(name);
     }
 
-    @GetMapping("api/namelist")
+    @PostMapping("api/namelist")
     @ResponseBody
     public List<Commodity> nameCommodityList(@RequestParam String name) {
+        System.out.println("haode"+name);
         return supplyService.getComByName(name);
     }
 
     @PostMapping("api/supply")
     @ResponseBody
-    public Result newSupply(@RequestParam BigDecimal amount, @RequestParam Date date, @RequestParam String pName, @RequestParam String cName) {
-        int cID = corporationDAO.corp(cName).get(0).getID();
+    public Result newSupply(@RequestParam BigDecimal amount, @RequestParam String pName) {
+//        int cID = corporationDAO.corp(cName).get(0).getID();
         int pID = commodityDAO.getComByExactName(pName).getID();
 
         Commodity c = commodityDAO.getComByExactName(pName);
 
+        Date date = new Date();
+
         Supply supply = new Supply();
         supply.setAmount(amount);
-        supply.setCorID(cID);
+//        supply.setCorID(cID);
         supply.setProductID(pID);
         supply.setSupplydate(date);
         supply.setTotalcost(c.getPrice().multiply(amount));
         supplyService.addSupply(supply);
 
-        c.setQuantity(c.getQuantity().add(amount));
+        BigDecimal temp = c.getQuantity().add(amount);
+
+        commodityDAO.updateQuantity(temp,pID);
 
         return ResultFactory.buildSuccessResult(supply);
+    }
+
+    @GetMapping("api/supplyList")
+    @ResponseBody
+    public List<Supply> supplyList() {
+        return supplyService.supplyList();
+    }
+
+    @GetMapping("api/need")
+    @ResponseBody
+    public List<Commodity> needSupply() {
+        return commodityDAO.getLackCom();
+    }
+
+    @GetMapping("api/alllist")
+    @ResponseBody
+    public List<Commodity> getAll() {
+        return commodityDAO.getComList();
     }
 }

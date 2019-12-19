@@ -16,6 +16,15 @@ public class Supply {
     private BigDecimal amount;
     private BigDecimal totalcost;
     private Date supplydate;
+    private int ID;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     public int getCorID() {
         return corID;

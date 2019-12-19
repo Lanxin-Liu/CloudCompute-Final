@@ -3,6 +3,7 @@ package com.anonymco.demo.dao;
 import com.anonymco.demo.model.Cart;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,4 +25,7 @@ public interface CartDAO {
 
     @Select("select * from Cart where purchased = 1")
     List<Cart> purchasedCartList();
+
+    @Update("update Cart set purchased = 1 where cartID = #{cartID}")
+    void updatePayStatus(int cartID);
 }
